@@ -15,6 +15,11 @@ const AllLists = (props) => {
   }
   };
 
+  const handleDelete = async (id)=>{
+    const url = `${import.meta.env.VITE_BACKEND_URL}/shoppingList/${id}`;
+    const response = await axios.delete(url);
+    return response, getAllLists()
+  }
   useEffect(() => {
     getAllLists();
   }, []);
@@ -29,6 +34,7 @@ const AllLists = (props) => {
                 <h2>{list.name}</h2>
                 <p>Last date to purchase: {new Date(list.date).toLocaleDateString()}</p>
                 <button onClick={()=> props.handleSelectedList(list)}>View Details</button>
+                <button onClick={()=> handleDelete(list._id)}>Delete</button>
             </div>
         )
       })}
