@@ -1,26 +1,40 @@
-import AllLists from "./components/AllLists"
-import { useState } from "react"
-import ListDetails from "./components/ListDetails"
-const App = () =>{
-  const [ selectedList,setSelectedList ] = useState(null)
+import AllLists from "./components/AllLists";
+import ListDetails from "./components/ListDetails";
+import ListForm from "./components/ListForm";
 
-  const handleSelectedList = (list)=>{
-    setSelectedList(list)
+import { use, useState } from "react";
 
-  }
-  return(
+const App = () => {
+  
+  const [selectedList, setSelectedList] = useState(null);
+  const [addList, setAddList] = useState(false);
+  const [formIsShown, setFormIsShown] = useState(false);
+  const handleSelectedList = (list) => {
+    setSelectedList(list);
+  };
 
+  const handleAddListButtonClick = () => {
+    setFormIsShown(true);
+    setAddList(true);
+  };
+
+  return (
     <>
-      {
-        selectedList
-        ?
-        <ListDetails selectedList={selectedList}/>
-        :
-        <AllLists handleSelectedList={handleSelectedList}/>
+      {formIsShown ? (
+        <ListForm setFormIsShown={setFormIsShown} setAddList={setAddList} />
+      ) : null}
 
-      }
+      {selectedList ? (
+        <ListDetails selectedList={selectedList} />
+      ) : (
+        <AllLists
+          handleSelectedList={handleSelectedList}
+          handleAddListButtonClick={handleAddListButtonClick}
+          setFormIsShown={setFormIsShown}
+        />
+      )}
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
