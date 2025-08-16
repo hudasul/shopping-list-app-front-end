@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const AllLists = () => {
+const AllLists = (props) => {
   const [shoppingLists, setShoppingLists] = useState([])
 
   const getAllLists = async () => {
@@ -27,6 +27,7 @@ const AllLists = () => {
             <div key={list._id}>
                 <h2>{list.name}</h2>
                 <p>Last date to purchase: {new Date(list.date).toLocaleDateString()}</p>
+                <button onClick={()=> props.handleSelectedList(list)}>View Details</button>
             </div>
         )
       })}
