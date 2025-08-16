@@ -3,23 +3,28 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 const AllLists = (props) => {
-  const [shoppingLists, setShoppingLists] = useState([])
+ 
 
   const getAllLists = async () => {
      try {
     const url = `${import.meta.env.VITE_BACKEND_URL}/shoppingList`;
     const response = await axios.get(url);
-    setShoppingLists(response.data);
+    props.setShoppingLists(response.data);
   } catch (error) {
     console.log(error)
   }
   };
 
-  const handleDelete = async (id)=>{
-    const url = `${import.meta.env.VITE_BACKEND_URL}/shoppingList/${id}`;
-    const response = await axios.delete(url);
-    return response, getAllLists()
+ const handleDelete = async (id) => {
+  try {
+    await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/shoppingList/${id}`);
+    props.setShoppingLists(props.shoppingLists.filter(list => list._id !== id));
+  } catch (error) {
+    console.error(error);
   }
+};
+
+
   useEffect(() => {
     getAllLists();
   }, []);
@@ -28,7 +33,7 @@ const AllLists = (props) => {
     <>
       <h1>All Shopping Lists</h1>
       <button onClick={()=> props.handleAddListButtonClick()}>Add new List</button>
-      {shoppingLists.map((list)=>{
+      {props.shoppingLists.map((list)=>{
         return(
             <div key={list._id}>
                 <h2>{list.name}</h2>

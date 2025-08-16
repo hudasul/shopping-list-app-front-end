@@ -5,10 +5,11 @@ import ListForm from "./components/ListForm";
 import { use, useState } from "react";
 
 const App = () => {
-  
   const [selectedList, setSelectedList] = useState(null);
   const [addList, setAddList] = useState(false);
+  const [shoppingLists, setShoppingLists] = useState([]);
   const [formIsShown, setFormIsShown] = useState(false);
+  
   const handleSelectedList = (list) => {
     setSelectedList(list);
   };
@@ -21,7 +22,12 @@ const App = () => {
   return (
     <>
       {formIsShown ? (
-        <ListForm setFormIsShown={setFormIsShown} setAddList={setAddList} />
+        <ListForm
+          setFormIsShown={setFormIsShown}
+          setAddList={setAddList}
+          setShoppingLists={setShoppingLists}
+          shoppingLists={shoppingLists}
+        />
       ) : null}
 
       {selectedList ? (
@@ -31,6 +37,8 @@ const App = () => {
           handleSelectedList={handleSelectedList}
           handleAddListButtonClick={handleAddListButtonClick}
           setFormIsShown={setFormIsShown}
+          shoppingLists={shoppingLists}
+          setShoppingLists={setShoppingLists}
         />
       )}
     </>
