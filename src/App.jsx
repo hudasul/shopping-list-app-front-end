@@ -9,15 +9,22 @@ const App = () => {
   const [addList, setAddList] = useState(false);
   const [shoppingLists, setShoppingLists] = useState([]);
   const [formIsShown, setFormIsShown] = useState(false);
+  const [updatedList,setUpdatedList] = useState(null);
   
   const handleSelectedList = (list) => {
     setSelectedList(list);
   };
 
   const handleAddListButtonClick = () => {
+    setUpdatedList(null); 
     setFormIsShown(true);
     setAddList(true);
   };
+
+  const handleUpdate = (list)=>{
+     setUpdatedList(list)
+     setFormIsShown(true);
+  }
 
   return (
     <>
@@ -27,6 +34,7 @@ const App = () => {
           setAddList={setAddList}
           setShoppingLists={setShoppingLists}
           shoppingLists={shoppingLists}
+          updatedList={updatedList}
         />
       ) : null}
 
@@ -39,6 +47,7 @@ const App = () => {
           setFormIsShown={setFormIsShown}
           shoppingLists={shoppingLists}
           setShoppingLists={setShoppingLists}
+          handleUpdate={handleUpdate}
         />
       )}
     </>

@@ -40,6 +40,7 @@ const AllLists = (props) => {
                 <p>Last date to purchase: {new Date(list.date).toLocaleDateString()}</p>
                 <button onClick={()=> props.handleSelectedList(list)}>View Details</button>
                 <button onClick={()=> handleDelete(list._id)}>Delete</button>
+                <button onClick={()=> props.handleUpdate(list)}>Edit</button>
             </div>
         )
       })}
