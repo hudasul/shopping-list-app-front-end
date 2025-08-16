@@ -21,7 +21,8 @@ const AllLists = (props) => {
 
   return (
     <>
-      <h1>AllLists</h1>
+      <h1>All Shopping Lists</h1>
+      <button onClick={()=> props.handleAddListButtonClick()}>Add new List</button>
       {shoppingLists.map((list)=>{
         return(
             <div key={list._id}>
