@@ -12,7 +12,13 @@ const ListDetails = (props) => {
     const response = await axios.get(url);
     setListItems(response.data);
   };
+const handleDelete = async (id) => {
+  const url = `${import.meta.env.VITE_BACKEND_URL}/item/${id}`
+  const response = await axios.delete(url)
+  getShoppingListItems()
+  return response
 
+}
   useEffect(() => {
     getShoppingListItems();
   }, []);
@@ -29,7 +35,7 @@ const ListDetails = (props) => {
               <p>Price: {item.price}</p>
               <p>Quantity: {item.quantity}</p>
               <button>Update</button>
-              <button>Delete</button>
+              <button onClick={()=>{handleDelete(item._id)}}>Delete</button>
             </div>
           );
         })
