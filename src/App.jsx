@@ -3,47 +3,45 @@ import ListDetails from "./components/ListDetails";
 import ListForm from "./components/ListForm";
 import ItemForm from "./components/ItemForm";
 
-import { use, useState } from "react";
+import { useState } from "react";
 
 const App = () => {
   const [selectedList, setSelectedList] = useState(null);
   const [addList, setAddList] = useState(false);
   const [shoppingLists, setShoppingLists] = useState([]);
   const [formIsShown, setFormIsShown] = useState(false);
-  const [itemFormIsShown,setItemFormIsShown ] = useState(false);
-  const [updatedList,setUpdatedList] = useState(null);
-  const [item,setItem ] = useState(null)
-  const [updatedItem, setUpdatedItem] = useState(null)
+  const [itemFormIsShown, setItemFormIsShown] = useState(false);
+  const [updatedList, setUpdatedList] = useState(null);
+  const [item, setItem] = useState(null);
+  const [updatedItem, setUpdatedItem] = useState(null);
+
   const handleSelectedList = (list) => {
     setSelectedList(list);
   };
 
-  const handleAddListButtonClick = (listId) => {
-    setUpdatedList(null); 
+  const handleAddListButtonClick = () => {
+    setUpdatedList(null);
     setFormIsShown(true);
     setAddList(true);
   };
 
   const handleAddItemButtonClick = () => {
-
-    setItemFormIsShown(true)
-  
+    setItemFormIsShown(true);
   };
 
-  const addItemToList = async (itemFormData)=>{
-    const newItem = {...itemFormData}
-    setItem(newItem)
+  const addItemToList = async (itemFormData) => {
+    const newItem = { ...itemFormData };
+    setItem(newItem);
+  };
 
-  }
-
-  const handleUpdate = (list)=>{
-     setUpdatedList(list)
-     setFormIsShown(true);
-  }
-const handleItemUpdate = (item) => {
-setUpdatedItem(item)
-setItemFormIsShown(true)
-}
+  const handleUpdate = (list) => {
+    setUpdatedList(list);
+    setFormIsShown(true);
+  };
+  const handleItemUpdate = (item) => {
+    setUpdatedItem(item);
+    setItemFormIsShown(true);
+  };
   return (
     <>
       {formIsShown ? (
@@ -56,17 +54,21 @@ setItemFormIsShown(true)
         />
       ) : null}
 
-      {
-        itemFormIsShown
-        ?
-        <ItemForm selectedList={selectedList} addItemToList={addItemToList} updatedItem={updatedItem}/>
-        :
-        null
-
-      }
+      {itemFormIsShown ? (
+        <ItemForm
+          setItemFormIsShown={setItemFormIsShown}
+          selectedList={selectedList}
+          addItemToList={addItemToList}
+          updatedItem={updatedItem}
+        />
+      ) : null}
 
       {selectedList ? (
-        <ListDetails selectedList={selectedList} handleAddItemButtonClick={handleAddItemButtonClick} handleUpdate={handleItemUpdate} />
+        <ListDetails
+          selectedList={selectedList}
+          handleAddItemButtonClick={handleAddItemButtonClick}
+          handleUpdate={handleItemUpdate}
+        />
       ) : (
         <AllLists
           handleSelectedList={handleSelectedList}
