@@ -12,13 +12,12 @@ const ListDetails = (props) => {
     const response = await axios.get(url);
     setListItems(response.data);
   };
-const handleDelete = async (id) => {
-  const url = `${import.meta.env.VITE_BACKEND_URL}/item/${id}`
-  const response = await axios.delete(url)
-  getShoppingListItems()
-  return response
-
-}
+  const handleDelete = async (id) => {
+    const url = `${import.meta.env.VITE_BACKEND_URL}/item/${id}`;
+    const response = await axios.delete(url);
+    getShoppingListItems();
+    return response;
+  };
   useEffect(() => {
     getShoppingListItems();
   }, []);
@@ -34,8 +33,20 @@ const handleDelete = async (id) => {
               <h2>{item.name}</h2>
               <p>Price: {item.price}</p>
               <p>Quantity: {item.quantity}</p>
-              <button onClick={()=>{props.handleUpdate(item)}}>Update</button>
-              <button onClick={()=>{handleDelete(item._id)}}>Delete</button>
+              <button
+                onClick={() => {
+                  props.handleUpdate(item);
+                }}
+              >
+                Update
+              </button>
+              <button
+                onClick={() => {
+                  handleDelete(item._id);
+                }}
+              >
+                Delete
+              </button>
             </div>
           );
         })
