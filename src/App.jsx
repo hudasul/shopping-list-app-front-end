@@ -59,7 +59,7 @@ setItemFormIsShown(true)
       {
         itemFormIsShown
         ?
-        <ItemForm selectedList={selectedList} addItemToList={addItemToList}/>
+        <ItemForm selectedList={selectedList} addItemToList={addItemToList} updatedItem={updatedItem}/>
         :
         null
 
