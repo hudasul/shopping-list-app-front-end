@@ -1,6 +1,7 @@
 import AllLists from "./components/AllLists";
 import ListDetails from "./components/ListDetails";
 import ListForm from "./components/ListForm";
+import ItemForm from "./components/ItemForm";
 
 import { use, useState } from "react";
 
@@ -9,17 +10,31 @@ const App = () => {
   const [addList, setAddList] = useState(false);
   const [shoppingLists, setShoppingLists] = useState([]);
   const [formIsShown, setFormIsShown] = useState(false);
+  const [itemFormIsShown,setItemFormIsShown ] = useState(false);
   const [updatedList,setUpdatedList] = useState(null);
+  const [item,setItem ] = useState(null)
   
   const handleSelectedList = (list) => {
     setSelectedList(list);
   };
 
-  const handleAddListButtonClick = () => {
+  const handleAddListButtonClick = (listId) => {
     setUpdatedList(null); 
     setFormIsShown(true);
     setAddList(true);
   };
+
+  const handleAddItemButtonClick = () => {
+
+    setItemFormIsShown(true)
+  
+  };
+
+  const addItemToList = async (itemFormData)=>{
+    const newItem = {...itemFormData}
+    setItem(newItem)
+
+  }
 
   const handleUpdate = (list)=>{
      setUpdatedList(list)
@@ -38,8 +53,17 @@ const App = () => {
         />
       ) : null}
 
+      {
+        itemFormIsShown
+        ?
+        <ItemForm selectedList={selectedList} addItemToList={addItemToList}/>
+        :
+        null
+
+      }
+
       {selectedList ? (
-        <ListDetails selectedList={selectedList} />
+        <ListDetails selectedList={selectedList} handleAddItemButtonClick={handleAddItemButtonClick} />
       ) : (
         <AllLists
           handleSelectedList={handleSelectedList}
