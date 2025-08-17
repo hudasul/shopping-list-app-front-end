@@ -63,7 +63,8 @@ const App = () => {
       }
 
       {selectedList ? (
-        <ListDetails selectedList={selectedList} handleAddItemButtonClick={handleAddItemButtonClick} />
+        <ListDetails selectedList={selectedList} handleAddItemButtonClick={handleAddItemButtonClick}  shoppingLists={shoppingLists}
+          setShoppingLists={setShoppingLists} />
       ) : (
         <AllLists
           handleSelectedList={handleSelectedList}
