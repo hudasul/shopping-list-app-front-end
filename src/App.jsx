@@ -1,86 +1,25 @@
 import AllLists from "./components/AllLists";
-import ListDetails from "./components/ListDetails";
 import ListForm from "./components/ListForm";
+import ListDetails from "./components/ListDetails";
 import ItemForm from "./components/ItemForm";
 
-import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router";
 
-const App = () => {
-  const [selectedList, setSelectedList] = useState(null);
-  const [addList, setAddList] = useState(false);
-  const [shoppingLists, setShoppingLists] = useState([]);
-  const [formIsShown, setFormIsShown] = useState(false);
-  const [itemFormIsShown, setItemFormIsShown] = useState(false);
-  const [updatedList, setUpdatedList] = useState(null);
-  const [item, setItem] = useState(null);
-  const [updatedItem, setUpdatedItem] = useState(null);
-
-  const handleSelectedList = (list) => {
-    setSelectedList(list);
-  };
-
-  const handleAddListButtonClick = () => {
-    setUpdatedList(null);
-    setFormIsShown(true);
-    setAddList(true);
-  };
-
-  const handleAddItemButtonClick = () => {
-    setItemFormIsShown(true);
-  };
-
-  const addItemToList = async (itemFormData) => {
-    const newItem = { ...itemFormData };
-    setItem(newItem);
-  };
-
-  const handleUpdate = (list) => {
-    setUpdatedList(list);
-    setFormIsShown(true);
-  };
-  const handleItemUpdate = (item) => {
-    setUpdatedItem(item);
-    setItemFormIsShown(true);
-  };
+const App = ()=> {
   return (
     <>
-      {formIsShown ? (
-        <ListForm
-          setFormIsShown={setFormIsShown}
-          setAddList={setAddList}
-          setShoppingLists={setShoppingLists}
-          shoppingLists={shoppingLists}
-          updatedList={updatedList}
-        />
-      ) : null}
-
-      {itemFormIsShown ? (
-        <ItemForm
-          setItemFormIsShown={setItemFormIsShown}
-          selectedList={selectedList}
-          addItemToList={addItemToList}
-          updatedItem={updatedItem}
-        />
-      ) : null}
-
-      {selectedList ? (
-        <ListDetails
-          selectedList={selectedList}
-          handleAddItemButtonClick={handleAddItemButtonClick}
-          handleUpdate={handleItemUpdate}
-        />
-      ) : (
-        <AllLists
-          handleSelectedList={handleSelectedList}
-          handleAddListButtonClick={handleAddListButtonClick}
-          setFormIsShown={setFormIsShown}
-          shoppingLists={shoppingLists}
-          setShoppingLists={setShoppingLists}
-          handleUpdate={handleUpdate}
-        />
-      )}
+    <Router>
+      <Routes>
+        <Route path="/" element={<AllLists />} />
+        <Route path="/new-list" element={<ListForm />} />
+        <Route path="/edit-list/:listId" element={<ListForm />} />
+        <Route path="/list/:listId" element={<ListDetails />} />
+        <Route path="/list/:listId/new-item" element={<ItemForm />} />
+        <Route path="/list/:listId/edit-item/:itemId" element={<ItemForm />} />
+      </Routes>
+    </Router>
     </>
   );
-};
+}
 
 export default App;

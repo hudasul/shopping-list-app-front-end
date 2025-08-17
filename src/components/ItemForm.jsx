@@ -1,12 +1,28 @@
-import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router";
 import axios from "axios";
 
-const ItemForm = (props) => {
+const ItemForm = () => {
   const initialState = { name: "", price: "", quantity: "" };
-  const [itemFormData, setItemFormData] = useState(
-    props.updatedItem ? props.updatedItem : initialState
-  );
+  const [itemFormData, setItemFormData] = useState(initialState);
+  const { listId, itemId } = useParams();
+  const navigate = useNavigate();
+  const baseUrl = import.meta.env.VITE_BACKEND_URL;
+
+  const getItemData = async (id) => {
+    try {
+      const response = await axios.get(`${baseUrl}/item/${id}`);
+      setItemFormData(response.data);
+    } catch (err) {
+      console.log(err)
+    }
+  };
+
+    useEffect(() => {
+    if (itemId) {
+      getItemData(itemId);
+    }
+  }, [itemId]);
 
   const handleChange = (event) => {
     setItemFormData({
@@ -17,55 +33,43 @@ const ItemForm = (props) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    props.setItemFormIsShown(false);
-    const ListID = props.selectedList._id;
-    const baseUrl = `${import.meta.env.VITE_BACKEND_URL}`;
-    const url = props.updatedItem
-      ? `${baseUrl}/item/${props.updatedItem._id}`
-      : `${baseUrl}/shoppingList/${ListID}/item`;
-    const method = props.updatedItem ? `put` : "post";
-    const response = await axios[method](url, itemFormData);
-    setItemFormData(response.data);
-    props.addItemToList(itemFormData);
+    if (itemId) {
+      await axios.put(`${baseUrl}/item/${itemId}`, itemFormData);
+    } else {
+      await axios.post(`${baseUrl}/shoppingList/${listId}/item`, itemFormData);
+    }
+    navigate(`/list/${listId}`);
   };
 
   return (
     <>
-      <h1> {props.updatedItem ? "update Item" : "Add an Item"}</h1>
+      <button onClick={() => navigate(`/list/${listId}`)}>
+        Shopping List Details
+      </button>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Name: </label>
+        <h2>{itemId ? "Update Item" : "Add New Item"}</h2>
         <input
           type="text"
-          id="name"
           name="name"
           value={itemFormData.name}
           onChange={handleChange}
         />
-        <br />
-        <br />
 
-        <label htmlFor="price">Price: </label>
         <input
           type="number"
-          id="price"
           name="price"
           value={itemFormData.price}
           onChange={handleChange}
         />
-        <br />
-        <br />
-        <label htmlFor="quantity">Quantity: </label>
+
         <input
           type="number"
-          id="quantity"
           name="quantity"
           value={itemFormData.quantity}
           onChange={handleChange}
         />
-        <br />
-        <br />
 
-        <button> {props.updatedItem ? "update" : "Add"}</button>
+        <button type="submit">{itemId ? "Update" : "Add"}</button>
       </form>
     </>
   );

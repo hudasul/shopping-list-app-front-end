@@ -1,24 +1,30 @@
-import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router";
 import axios from "axios";
 
-const ListForm = (props) => {
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const initialState = {
-    name: "",
-    date: "",
+const ListForm = () => {
+  const [formData, setFormData] = useState({ name: "", date: "" });
+  const { listId } = useParams();
+  const navigate = useNavigate();
+  const baseUrl = import.meta.env.VITE_BACKEND_URL;
+
+   const getListData = async (id) => {
+    try {
+      const response = await axios.get(`${baseUrl}/shoppingList/${id}`);
+      const list = response.data;
+      const ListdDate = new Date(list.date).toISOString().split("T")[0];
+      setFormData({ name: list.name, date: ListdDate});
+    } catch (err) {
+      console.log(err)
+    }
   };
 
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toISOString().split("T")[0];
-  };
+  useEffect(() => {
+    if (listId) {
+      getListData(listId);
+    }
+  }, [listId]);
 
-  const [formData, setFormData] = useState(
-    props.updatedList
-      ? { ...props.updatedList, date: formatDate(props.updatedList.date) }
-      : initialState
-  );
 
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
@@ -26,63 +32,46 @@ const ListForm = (props) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    if (isSubmitted) return;
-    setIsSubmitted(true);
-
-    const baseUrl = `${import.meta.env.VITE_BACKEND_URL}/shoppingList`;
-    const url = props.updatedList
-      ? `${baseUrl}/${props.updatedList._id}`
-      : `${baseUrl}/new`;
-
-    const method = props.updatedList ? "put" : "post";
-    const response = await axios[method](url, formData);
-
-    if (response.status === 200 || response.status === 201) {
-      if (props.updatedList) {
-        const updatedLists = props.shoppingLists.map((list) =>
-          list._id === response.data._id ? response.data : list
-        );
-        props.setShoppingLists(updatedLists);
-      } else {
-        props.setShoppingLists([...props.shoppingLists, response.data]);
-      }
-
-      props.setFormIsShown(false);
-      props.setAddList(false);
+    if (listId) {
+      await axios.put(`${baseUrl}/shoppingList/${listId}`, formData);
+    } else {
+      await axios.post(`${baseUrl}/shoppingList/new`, formData);
     }
-
-    setIsSubmitted(false);
+    navigate("/");
   };
 
   return (
     <>
-      <h1>{props.updatedList ? "Update List" : "Add a new Shopping List"}</h1>
+      <button onClick={() => navigate("/")}>All Shopping Lists</button>
 
       <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Name: </label>
+        <h2>{listId ? "Update List" : "Add New List"}</h2>
+
+        <label htmlFor="name">Name:</label>
         <input
           type="text"
-          id="name"
           name="name"
           value={formData.name}
           onChange={handleChange}
+          required
         />
+
         <br />
         <br />
 
-        <label htmlFor="date">Last date to purchase: </label>
+        <label htmlFor="date">Last Date to purchase: </label>
         <input
           type="date"
-          id="date"
           name="date"
           value={formData.date}
           onChange={handleChange}
+          required
         />
+
         <br />
         <br />
 
-        <button>{props.updatedList ? "update" : "Add"}</button>
+        <button type="submit">{listId ? "Update" : "Add"}</button>
       </form>
     </>
   );
