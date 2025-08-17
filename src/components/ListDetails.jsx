@@ -34,7 +34,7 @@ const handleDelete = async (id) => {
               <h2>{item.name}</h2>
               <p>Price: {item.price}</p>
               <p>Quantity: {item.quantity}</p>
-              <button>Update</button>
+              <button onClick={()=>{props.handleUpdate(item)}}>Update</button>
               <button onClick={()=>{handleDelete(item._id)}}>Delete</button>
             </div>
           );

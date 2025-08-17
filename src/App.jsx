@@ -13,7 +13,7 @@ const App = () => {
   const [itemFormIsShown,setItemFormIsShown ] = useState(false);
   const [updatedList,setUpdatedList] = useState(null);
   const [item,setItem ] = useState(null)
-  
+  const [updatedItem, setUpdatedItem] = useState(null)
   const handleSelectedList = (list) => {
     setSelectedList(list);
   };
@@ -40,7 +40,10 @@ const App = () => {
      setUpdatedList(list)
      setFormIsShown(true);
   }
-
+const handleItemUpdate = (item) => {
+setUpdatedItem(item)
+setItemFormIsShown(true)
+}
   return (
     <>
       {formIsShown ? (
@@ -56,15 +59,14 @@ const App = () => {
       {
         itemFormIsShown
         ?
-        <ItemForm selectedList={selectedList} addItemToList={addItemToList}/>
+        <ItemForm selectedList={selectedList} addItemToList={addItemToList} updatedItem={updatedItem}/>
         :
         null
 
       }
 
       {selectedList ? (
-        <ListDetails selectedList={selectedList} handleAddItemButtonClick={handleAddItemButtonClick}  shoppingLists={shoppingLists}
-          setShoppingLists={setShoppingLists} />
+        <ListDetails selectedList={selectedList} handleAddItemButtonClick={handleAddItemButtonClick} handleUpdate={handleItemUpdate} />
       ) : (
         <AllLists
           handleSelectedList={handleSelectedList}

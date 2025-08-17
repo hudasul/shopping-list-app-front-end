@@ -3,11 +3,11 @@ import { useState } from "react";
 import axios from "axios";
 
 const ItemForm = (props) => {
-   const [itemFormData, setItemFormData] = useState({
-  name: '',
+   const initialState = {  name: '',
   price: '',
-  quantity: ''
-});
+  quantity: ''}
+  const [itemFormData, setItemFormData] = useState(props.updatedItem? props.updatedItem: initialState
+);
 
 const handleChange = (event) => {
     setItemFormData({ ...itemFormData, [event.target.name]: event.target.value }); 
@@ -16,15 +16,18 @@ const handleChange = (event) => {
 const handleSubmit= async (event)=>{
     event.preventDefault();
     const ListID = props.selectedList._id
-    const url= `${import.meta.env.VITE_BACKEND_URL}/shoppingList/${ListID}/item`
-    const response = await axios.post(url,itemFormData)
+    const baseUrl =  `${import.meta.env.VITE_BACKEND_URL}`
+    const url= props.updatedItem?  `${baseUrl}/item/${props.updatedItem._id}`: `${baseUrl}/shoppingList/${ListID}/item`
+    const method = props.updatedItem? `put`:'post'
+    const response = await axios[method](url,itemFormData)
     setItemFormData(response.data)
     props.addItemToList(itemFormData)
 
 }
   return (
     <>
-        <h1>Add an Item</h1>
+    
+        <h1> {props.updatedItem? 'update Item': 'Add an Item'}</h1>
          <form onSubmit={handleSubmit} >
         <label htmlFor="name">Name: </label>
         <input
@@ -62,7 +65,7 @@ const handleSubmit= async (event)=>{
         <br />
         <br />
 
-        <button>Add</button>
+        <button> {props.updatedItem? 'update': 'Add'}</button>
       </form>
     </>
   )
