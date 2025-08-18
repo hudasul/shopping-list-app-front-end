@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
 
-const AllLists = () => {
+const AllLists = ({ token, user }) => {
   const [errors, setErrors] = useState("");
   const [lists, setLists] = useState([]);
   const [sortByDate, setSortByDate] = useState(false);
@@ -10,15 +10,18 @@ const AllLists = () => {
   const navigate = useNavigate();
 
   const getAllLists = async () => {
-    const token = localStorage.getItem("token");
-    if (!token) return;
+    if (!token || !user) return;
 
     try {
       const url = `${baseUrl}/shoppingList`;
       const response = await axios.get(url, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setLists(response.data);
+
+      const userLists = response.data.filter(
+        (list) => list.creator === user.id
+      );
+      setLists(userLists);
     } catch (error) {
       setErrors("Unauthorized or error fetching data");
     }

@@ -14,10 +14,9 @@ function SignUp() {
         username,
         password
       })
-      alert('User registered, please login')
       navigate('/login')
     } catch (err) {
-      alert(err.response?.data?.message || 'Registration failed')
+      console.log(err)
     }
   }
 
