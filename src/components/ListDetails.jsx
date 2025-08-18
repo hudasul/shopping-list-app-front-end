@@ -24,9 +24,14 @@ const ListDetails = () => {
     }
   };
   const calculateAmount = (items) => {
+    
+    (items
+    ?
     items.map((item)=>{
       totalMoney += item.price * item.quantity
     })
+    :
+    null)
 
   }
   useEffect(() => {
