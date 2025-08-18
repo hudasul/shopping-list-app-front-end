@@ -8,6 +8,7 @@ const ListDetails = () => {
   const [items, setItems] = useState([]);
   const baseUrl = import.meta.env.VITE_BACKEND_URL;
   const navigate = useNavigate();
+  let totalMoney = 0 
 
   const getListDetails = async (id) => {
     try {
@@ -22,7 +23,12 @@ const ListDetails = () => {
       console.log(err);
     }
   };
+  const calculateAmount = (items) => {
+    items.map((item)=>{
+      totalMoney += item.price * item.quantity
+    })
 
+  }
   useEffect(() => {
     if (listId) {
       getListDetails(listId);
@@ -36,12 +42,16 @@ const ListDetails = () => {
   };
 
   return (
+    <>
     <div>
       <button onClick={() => navigate("/")}>All Shopping Lists</button>
       <h2>{list.name}</h2>
-      <button onClick={() => navigate(`/list/${listId}/new-item`)}>
+      {calculateAmount(items)}
+        <h2>total amount: {totalMoney}</h2>
+        <button onClick={() => navigate(`/list/${listId}/new-item`)}>
         Add Item
       </button>
+   
       <ul>
         {items.length === 0 ? (
           <h2>This List is Empty!</h2>
@@ -51,6 +61,7 @@ const ListDetails = () => {
               <h2>{item.name}</h2>
               <p>Price: {item.price} BD</p>
               <p>Quantity: {item.quantity}</p>
+              
               <button
                 onClick={() =>
                   navigate(`/list/${listId}/edit-item/${item._id}`)
@@ -64,6 +75,7 @@ const ListDetails = () => {
         )}
       </ul>
     </div>
+    </>
   );
 };
 
