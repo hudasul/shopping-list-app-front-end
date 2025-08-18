@@ -7,27 +7,24 @@ import SignUp from "./components/SignupForm";
 import LogoutButton from "./components/LogoutButton";
 import ProtectedRoute from "./components/ProtectedRoute";
 
-import {jwtDecode} from 'jwt-decode'
-import { useState } from 'react'
+import { jwtDecode } from "jwt-decode";
+import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router";
 
 const App = () => {
   const [token, setToken] = useState(localStorage.getItem("token"));
+  const [user, setUser] = useState(token ? jwtDecode(token) : null);
 
   function handleLogin(newToken) {
+    const decoded = jwtDecode(newToken);
     setToken(newToken);
+    setUser(decoded);
+    localStorage.setItem("token", newToken);
   }
 
   function handleLogout() {
     setToken(null);
     localStorage.removeItem("token");
-  }
-
-  // This is how to decode the token and gget the
-  // information that you added to the payload in your login
-  // route in the backend
-  if (token) {
-    const decodedToken = jwtDecode(token);
   }
 
   return (
@@ -44,13 +41,17 @@ const App = () => {
             <Route
               path="/"
               element={
-                <ProtectedRoute>
-                  <AllLists />
+                <ProtectedRoute >
+                  <AllLists token={token} user={user} />
                 </ProtectedRoute>
               }
             />
-            <Route path="/new-list" element={<ListForm />} />
-            <Route path="/edit-list/:listId" element={<ListForm />} />
+
+            <Route path="/new-list" element={<ListForm token={token} />} />
+            <Route
+              path="/edit-list/:listId"
+              element={<ListForm token={token} />}
+            />
             <Route path="/list/:listId" element={<ListDetails />} />
             <Route path="/list/:listId/new-item" element={<ItemForm />} />
             <Route

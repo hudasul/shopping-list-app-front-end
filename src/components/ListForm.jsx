@@ -2,20 +2,24 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 import axios from "axios";
 
-const ListForm = () => {
+const ListForm = ({ token }) => {
   const [formData, setFormData] = useState({ name: "", date: "" });
   const { listId } = useParams();
   const navigate = useNavigate();
   const baseUrl = import.meta.env.VITE_BACKEND_URL;
 
-   const getListData = async (id) => {
+  const getListData = async (id) => {
     try {
-      const response = await axios.get(`${baseUrl}/shoppingList/${id}`);
+      const response = await axios.get(`${baseUrl}/shoppingList/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const list = response.data;
       const ListdDate = new Date(list.date).toISOString().split("T")[0];
-      setFormData({ name: list.name, date: ListdDate});
+      setFormData({ name: list.name, date: ListdDate });
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   };
 
@@ -25,19 +29,30 @@ const ListForm = () => {
     }
   }, [listId]);
 
-
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (listId) {
-      await axios.put(`${baseUrl}/shoppingList/${listId}`, formData);
-    } else {
-      await axios.post(`${baseUrl}/shoppingList/new`, formData);
+    try {
+      if (listId) {
+        await axios.put(`${baseUrl}/shoppingList/${listId}`, formData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      } else {
+        await axios.post(`${baseUrl}/shoppingList/new`, formData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      }
+      navigate("/");
+    } catch (err) {
+      console.log(err);
     }
-    navigate("/");
   };
 
   return (
