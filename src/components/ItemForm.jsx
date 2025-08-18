@@ -48,20 +48,21 @@ const ItemForm = () => {
       </button>
       <form onSubmit={handleSubmit}>
         <h2>{itemId ? "Update Item" : "Add New Item"}</h2>
+        <label htmlFor="name">name:</label>
         <input
           type="text"
           name="name"
           value={itemFormData.name}
           onChange={handleChange}
         />
-
+        <label htmlFor="price">price:</label>
         <input
           type="number"
           name="price"
           value={itemFormData.price}
           onChange={handleChange}
         />
-
+        <label htmlFor="quantity">quantity:</label>
         <input
           type="number"
           name="quantity"
