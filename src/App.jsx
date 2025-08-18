@@ -28,7 +28,6 @@ const App = () => {
   // route in the backend
   if (token) {
     const decodedToken = jwtDecode(token);
-    console.log(decodedToken);
   }
 
   return (
