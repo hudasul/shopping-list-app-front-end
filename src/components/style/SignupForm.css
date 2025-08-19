@@ -1,0 +1,25 @@
+.signup-container form{
+  height: 400px;
+}
+
+.signup-container h1{
+    text-align: center;
+    font-size: 50px;
+}
+
+.Signup-inputs input{
+    width: 100%;
+    padding: 12px 20px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.signup-btns button{
+    background-color: #541ec9;
+    color: white;
+    padding: 14px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
