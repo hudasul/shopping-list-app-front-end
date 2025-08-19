@@ -50,7 +50,7 @@ const ListDetails = () => {
 
   return (
     <>
-    <div>
+    <div className="details">
       <h1>{list.name}</h1>
       {calculateAmount(items)}
         <h2 id="amount">Total Amount: {totalMoney}</h2>

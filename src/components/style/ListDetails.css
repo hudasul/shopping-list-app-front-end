@@ -10,12 +10,14 @@
 
 }
 
-h1{
+.details h1{
     text-align: center;
     font-size: 70px;
 }
+
 #amount{
-    font-size: 30px;
+    font-size: 40px;
+    text-align: center;
 }
 .buttons{
 display: flex;
@@ -28,13 +30,28 @@ height: 55px;
 }
 
 .buttons button{
-    width: 90px;
+     background-color: #541ec9;
+    color: white;
+    height: 45px;
+    cursor: pointer;
+    width: 100px;
+    border: none;
+    margin-top: -25px;
+     
 }
 #add-button{
     width: 150px;
+     background-color: #541ec9;
+    color: white;
+     border: none;
+    padding: 10px 20px;
 }
 #shopping-list-button{
     width: 150px;
+     background-color: #541ec9;
+    color: white;
+    padding: 15px 20px;
+    border: none;
 }
 
 .button-style{
