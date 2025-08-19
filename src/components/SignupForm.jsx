@@ -35,6 +35,8 @@ function SignUp() {
         onChange={event => setPassword(event.target.value)}
       />
       <button type="submit">Sign Up</button>
+        <button type="submit" onClick={()=> navigate('/login')}>Login</button>
+   
     </form>
   )
 }
