@@ -6,7 +6,7 @@ body {
     padding: 40px;
 }
 
-h2 {
+#login-header{
     text-align: center;
     font-size: 50px;
 }
@@ -27,7 +27,7 @@ form {
 
 }
 
-input {
+.login-inputs input {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -36,7 +36,7 @@ input {
     box-sizing: border-box;
 }
 
-button {
+.login-btns button {
     background-color: #541ec9;
     color: white;
     padding: 14px 20px;
