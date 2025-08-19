@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import axios from 'axios'
-
+import './style/LoginForm.css'
 function SignUp() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')

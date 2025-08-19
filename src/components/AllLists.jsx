@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
-import './style/AllLists.css'
+import "./style/AllLists.css";
 const AllLists = ({ token, user }) => {
   const [errors, setErrors] = useState("");
   const [lists, setLists] = useState([]);
@@ -49,27 +49,38 @@ const AllLists = ({ token, user }) => {
 
   return (
     <>
-      <div>
+      <div className="container">
         <h2>All Shopping Lists</h2>
-        <button onClick={() => navigate("/new-list")}>Add New List</button>
-        <label>
-          <input
-            type="checkbox"
-            checked={sortByDate}
-            onChange={(event) => setSortByDate(event.target.checked)}
-          />
-          Sort by Date
-        </label>
+        <button className="add-button" onClick={() => navigate("/new-list")}>
+          Add New List
+        </button>
+        <div className="sort-by-date">
+          <div id="inner-sort-date">
+            
+            <input
+              type="checkbox"
+              checked={sortByDate}
+              onChange={(event) => setSortByDate(event.target.checked)}
+            />
+            <div>
+              <label>Sort by Date</label>
+            </div>
+
+          </div>
+        </div>
         {lists.length === 0 ? (
           <h2>There are no Lists</h2>
         ) : (
           lists.map((list) => (
-            <div key={list._id}>
+            <div className="list" key={list._id}>
+              <div className="list-info">
               <h1>{list.name}</h1>
               <p>
                 Last date to purchase:{" "}
                 {new Date(list.date).toLocaleDateString()}
               </p>
+              </div>
+              <div className="buttons">
               <button onClick={() => navigate(`/list/${list._id}`)}>
                 View
               </button>
@@ -77,6 +88,7 @@ const AllLists = ({ token, user }) => {
                 Edit
               </button>
               <button onClick={() => handleDelete(list._id)}>Delete</button>
+            </div>
             </div>
           ))
         )}
