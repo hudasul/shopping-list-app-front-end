@@ -1,0 +1,36 @@
+.itemform-container{
+    text-align: center;
+}
+
+.add-item-form input{
+     width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.add-item-form button{
+    background-color: #541ec9;
+    color: white;
+    padding: 14px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.add-item-form h2{
+    font-size: 28px;
+    text-align: center;
+}
+
+#go-back-to-lists-btn{
+    margin: 25px 0;
+    background-color: #541ec9;
+    color: white;
+    padding: 14px 20px;
+    border: none;
+    cursor: pointer;
+    width: 200px;
+}
