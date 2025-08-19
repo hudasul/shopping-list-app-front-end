@@ -1,52 +1,84 @@
-.container{
+.header {
     display: flex;
     flex-direction: column;
+    text-align: center;
+    margin-top: 10PX;
 }
-.add-button{
+
+.header h2{
+    font-size: 45px;
+}
+
+.add-button {
     width: 175px;
     align-self: center;
-    
+    background-color: #541ec9;
+    color: white;
+    padding: 10px 20px;
+   
+
 }
-.sort-by-date{
+
+.sort-by-date {
     display: flex;
     flex-direction: row;
     justify-content: center;
-   
-    
+    margin-top: 5px;;
+
+
 }
 
-#inner-sort-date{
-    display:flex;
-    /* gap:30px */
+#inner-sort-date {
+    display: flex;
+    /* gap:5px; */
 }
 
 
-#inner-sort-date label{
-    display:inline-block;
+#inner-sort-date label {
+    display: inline-block;
     font-size: 10px;
-    
+
 
 }
 
-#inner-sort-date div{
-    width:150px
+#inner-sort-date div {
+    width: 150px
 }
-.list{
-    display:flex ;
+
+.list {
+    display: flex;
     background-color: white;
     color: black;
-    margin-top: 10px ;
+    margin-top: 30px;
     padding: 10px;
     gap: 50px;
     justify-content: space-between;
 
 }
-.buttons{
-  margin-top: 30px;  
-display: flex;
-gap: 5px;
-flex-direction: row;
-height: 55px;
+
+.list-info {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
 }
 
+.list-info h1 {
+    font-size: 30px;
 
+}
+
+.all-lists-buttons {
+    display: flex;
+    gap: 2px;
+    flex-direction: row;
+    margin-top: 100px;
+}
+
+.all-lists-buttons button {
+    background-color: #541ec9;
+    color: white;
+    height: 45px;
+    cursor: pointer;
+    width: 100px;
+    margin-top: -55px;
+}

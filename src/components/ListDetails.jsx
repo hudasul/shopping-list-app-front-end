@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
 import axios from "axios";
 
+import './style/ListDetails.css'
+
 const ListDetails = () => {
   const { listId } = useParams();
   const [list, setList] = useState({});
@@ -49,24 +51,28 @@ const ListDetails = () => {
   return (
     <>
     <div>
-      <button onClick={() => navigate("/")}>All Shopping Lists</button>
-      <h2>{list.name}</h2>
+      <h1>{list.name}</h1>
       {calculateAmount(items)}
-        <h2>total amount: {totalMoney}</h2>
-        <button onClick={() => navigate(`/list/${listId}/new-item`)}>
-        Add Item
+        <h2 id="amount">Total Amount: {totalMoney}</h2>
+        <div className="button-style">
+        <button id="add-button" onClick={() => navigate(`/list/${listId}/new-item`)}>
+        Add New Item
       </button>
+       <button id="shopping-list-button" onClick={() => navigate("/")}>All Shopping Lists</button>
+      </div>
    
       <ul>
         {items.length === 0 ? (
-          <h2>This List is Empty!</h2>
+          <h1>This List is Empty!</h1>
         ) : (
           items.map((item) => (
-            <div key={item._id}>
+            <div className="container" key={item._id}>
+              <div className="list-items">
               <h2>{item.name}</h2>
               <p>Price: {item.price} BD</p>
               <p>Quantity: {item.quantity}</p>
-              
+              </div>
+              <div className="buttons">
               <button
                 onClick={() =>
                   navigate(`/list/${listId}/edit-item/${item._id}`)
@@ -75,6 +81,7 @@ const ListDetails = () => {
                 Edit
               </button>
               <button onClick={() => handleDeleteItem(item._id)}>Delete</button>
+            </div>
             </div>
           ))
         )}

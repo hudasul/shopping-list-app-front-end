@@ -49,7 +49,7 @@ const AllLists = ({ token, user }) => {
 
   return (
     <>
-      <div className="container">
+    <div className="header">
         <h2>All Shopping Lists</h2>
         <button className="add-button" onClick={() => navigate("/new-list")}>
           Add New List
@@ -68,6 +68,8 @@ const AllLists = ({ token, user }) => {
 
           </div>
         </div>
+        </div>
+        
         {lists.length === 0 ? (
           <h2>There are no Lists</h2>
         ) : (
@@ -80,7 +82,7 @@ const AllLists = ({ token, user }) => {
                 {new Date(list.date).toLocaleDateString()}
               </p>
               </div>
-              <div className="buttons">
+              <div className="all-lists-buttons">
               <button onClick={() => navigate(`/list/${list._id}`)}>
                 View
               </button>
@@ -94,7 +96,7 @@ const AllLists = ({ token, user }) => {
         )}
 
         <p style={{ color: "darkred" }}>{errors}</p>
-      </div>
+
     </>
   );
 };

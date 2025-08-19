@@ -2,7 +2,9 @@
 width: 100px;
 height: 30px;
 margin-top: 5px;
-
+background-color: #541ec9;
+color: white;
+border: #541ec9
 }
 
 .navbar{
