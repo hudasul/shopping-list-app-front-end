@@ -1,44 +1,65 @@
-.container{
-     display:flex ;
+.container {
+    display: flex;
     background-color: white;
     color: black;
     margin-bottom: 5px;
-     padding: 5px 10px;
-     flex-direction: row;
+    padding: 5px 10px;
+    flex-direction: row;
     justify-content: space-between;
 
 
 }
 
-h1{
+.details h1 {
     text-align: center;
     font-size: 70px;
 }
-#amount{
-    font-size: 30px;
-}
-.buttons{
-display: flex;
-gap: 5px;
-flex-direction: row;
-margin-top: 70px;
-margin-right: 10px;
-gap: 5px;
-height: 55px;
+
+#amount {
+    font-size: 40px;
+    text-align: center;
 }
 
-.buttons button{
-    width: 90px;
-}
-#add-button{
-    width: 150px;
-}
-#shopping-list-button{
-    width: 150px;
+.buttons {
+    display: flex;
+    gap: 5px;
+    flex-direction: row;
+    margin-top: 70px;
+    margin-right: 10px;
+    gap: 5px;
+    height: 55px;
 }
 
-.button-style{
+.buttons button {
+    background-color: #541ec9;
+    color: white;
+    height: 45px;
+    cursor: pointer;
+    width: 100px;
+    border: none;
+    margin-top: -25px;
+
+}
+
+#add-button {
+    width: 150px;
+    background-color: #541ec9;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+}
+
+#shopping-list-button {
+    width: 150px;
+    background-color: #541ec9;
+    color: white;
+    padding: 15px 20px;
+    border: none;
+}
+
+.button-style {
     display: flex;
     justify-content: center;
     gap: 5px;
 }
+/* test */
