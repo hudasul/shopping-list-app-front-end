@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 import axios from "axios";
+import './style/ListForm.css'
 
 const ListForm = ({ token }) => {
   const [formData, setFormData] = useState({ name: "", date: "" });
@@ -56,10 +57,10 @@ const ListForm = ({ token }) => {
   };
 
   return (
-    <>
-      <button onClick={() => navigate("/")}>All Shopping Lists</button>
+    <div className="form-container">
+      <button id="back-to-all-list-btn" onClick={() => navigate("/")}>All Shopping Lists</button>
 
-      <form onSubmit={handleSubmit}>
+      <form className="add-list-form" onSubmit={handleSubmit}>
         <h2>{listId ? "Update List" : "Add New List"}</h2>
 
         <label htmlFor="name">Name:</label>
@@ -88,7 +89,7 @@ const ListForm = ({ token }) => {
 
         <button type="submit">{listId ? "Update" : "Add"}</button>
       </form>
-    </>
+    </div>
   );
 };
 
