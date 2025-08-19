@@ -1,0 +1,54 @@
+.container{
+    display: flex;
+    flex-direction: column;
+}
+.add-button{
+    width: 175px;
+    align-self: center;
+    
+}
+.sort-by-date{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+   
+    
+}
+
+#inner-sort-date{
+    display:flex;
+    /* gap:30px */
+}
+
+
+#inner-sort-date label{
+    display:inline-block;
+    font-size: 10px;
+    
+
+}
+
+#inner-sort-date div{
+    width:150px
+}
+.list{
+    display:flex ;
+    background-color: white;
+    color: black;
+    margin-top: 10px ;
+    padding: 10px;
+    gap: 50px;
+    justify-content: space-between;
+
+}
+.buttons{
+  margin-top: 30px;  
+display: flex;
+gap: 5px;
+flex-direction: row;
+height: 55px;
+}
+
+/* button{
+width: 220px;
+} */
