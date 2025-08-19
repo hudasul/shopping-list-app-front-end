@@ -24,6 +24,8 @@ function LoginForm({ onLogin }) {
   }
 
   return (
+    <>
+    
     <form onSubmit={handleSubmit}>
       <h2>Login</h2>
       <input 
@@ -38,7 +40,10 @@ function LoginForm({ onLogin }) {
         onChange={event => setPassword(event.target.value)}
       />
       <button type="submit">Login</button>
+      <button type="submit" onClick={()=> navigate('/signup')}>Sign Up</button>
+   
     </form>
+    </>
   )
 }
 
