@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 import axios from "axios";
+import'./style/ItemForm.css'
 
 const ItemForm = () => {
   const initialState = { name: "", price: "", quantity: "" };
@@ -42,37 +43,37 @@ const ItemForm = () => {
   };
 
   return (
-    <>
-      <button onClick={() => navigate(`/list/${listId}`)}>
+    <div className="itemform-container">
+      <button id="go-back-to-lists-btn" onClick={() => navigate(`/list/${listId}`)}>
         Shopping List Details
       </button>
-      <form onSubmit={handleSubmit}>
+      <form className="add-item-form" onSubmit={handleSubmit}>
         <h2>{itemId ? "Update Item" : "Add New Item"}</h2>
-        <label htmlFor="name">name:</label>
-        <input
+       <input
           type="text"
           name="name"
           value={itemFormData.name}
           onChange={handleChange}
+          placeholder="Name"
         />
-        <label htmlFor="price">price:</label>
-        <input
+       <input
           type="number"
           name="price"
           value={itemFormData.price}
           onChange={handleChange}
+          placeholder="Price"
         />
-        <label htmlFor="quantity">quantity:</label>
-        <input
+       <input
           type="number"
           name="quantity"
           value={itemFormData.quantity}
           onChange={handleChange}
+          placeholder="Quantity"
         />
 
         <button type="submit">{itemId ? "Update" : "Add"}</button>
       </form>
-    </>
+    </div>
   );
 };
 
