@@ -21,23 +21,33 @@ function SignUp() {
   }
 
   return (
+    <body>
+    <div className='container'>
     <form onSubmit={handleSubmit}>
-      <h2>Sign Up</h2>
+      <h1>Sign Up</h1>
       <input 
         placeholder="Username"
         value={username}
         onChange={event => setUsername(event.target.value)}
       />
+      <br />
+      <br />
       <input 
         placeholder="Password"
         type="password"
         value={password}
         onChange={event => setPassword(event.target.value)}
       />
+      <br />
+      <br />
       <button type="submit">Sign Up</button>
-        <button type="submit" onClick={()=> navigate('/login')}>Login</button>
-   
+      <br />
+      <br />
+      <button type="submit" onClick={()=> navigate('/login')}>Login</button>
+  
     </form>
+    </div>
+     </body>
   )
 }
 export default  SignUp
