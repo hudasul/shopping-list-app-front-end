@@ -7,10 +7,11 @@ function SignUp() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const baseUrl = import.meta.env.VITE_BACKEND_URL;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await axios.post("http://localhost:3000/auth/signup", {
+    await axios.post(`${baseUrl}/auth/signup`, {
       username,
       password,
     });
