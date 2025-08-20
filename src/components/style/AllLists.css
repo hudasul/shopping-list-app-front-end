@@ -41,6 +41,10 @@
 
 }
 
+#no-lists-message{
+    text-align: center;
+}
+
 #inner-sort-date div {
     width: 80px;
     font-weight: bolder;

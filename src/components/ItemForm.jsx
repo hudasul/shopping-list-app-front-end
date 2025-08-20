@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 import axios from "axios";
-import'./style/ItemForm.css'
+import "./style/ItemForm.css";
 
 const ItemForm = () => {
   const initialState = { name: "", price: "", quantity: "" };
@@ -11,15 +11,11 @@ const ItemForm = () => {
   const baseUrl = import.meta.env.VITE_BACKEND_URL;
 
   const getItemData = async (id) => {
-    try {
-      const response = await axios.get(`${baseUrl}/item/${id}`);
-      setItemFormData(response.data);
-    } catch (err) {
-      console.log(err)
-    }
+    const response = await axios.get(`${baseUrl}/item/${id}`);
+    setItemFormData(response.data);
   };
 
-    useEffect(() => {
+  useEffect(() => {
     if (itemId) {
       getItemData(itemId);
     }
@@ -44,26 +40,29 @@ const ItemForm = () => {
 
   return (
     <div className="itemform-container">
-      <button id="go-back-to-lists-btn" onClick={() => navigate(`/list/${listId}`)}>
+      <button
+        id="go-back-to-lists-btn"
+        onClick={() => navigate(`/list/${listId}`)}
+      >
         Shopping List Details
       </button>
       <form className="add-item-form" onSubmit={handleSubmit}>
         <h2>{itemId ? "Update Item" : "Add New Item"}</h2>
-       <input
+        <input
           type="text"
           name="name"
           value={itemFormData.name}
           onChange={handleChange}
           placeholder="Name"
         />
-       <input
+        <input
           type="number"
           name="price"
           value={itemFormData.price}
           onChange={handleChange}
           placeholder="Price"
         />
-       <input
+        <input
           type="number"
           name="quantity"
           value={itemFormData.quantity}
