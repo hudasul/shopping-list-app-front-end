@@ -41,7 +41,7 @@ const App = () => {
             <Route
               path="/"
               element={
-                <ProtectedRoute >
+                <ProtectedRoute>
                   <AllLists token={token} user={user} />
                 </ProtectedRoute>
               }

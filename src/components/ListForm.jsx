@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 import axios from "axios";
-import './style/ListForm.css'
+import "./style/ListForm.css";
 
 const ListForm = ({ token }) => {
   const [formData, setFormData] = useState({ name: "", date: "" });
@@ -10,18 +10,14 @@ const ListForm = ({ token }) => {
   const baseUrl = import.meta.env.VITE_BACKEND_URL;
 
   const getListData = async (id) => {
-    try {
-      const response = await axios.get(`${baseUrl}/shoppingList/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const list = response.data;
-      const ListdDate = new Date(list.date).toISOString().split("T")[0];
-      setFormData({ name: list.name, date: ListdDate });
-    } catch (err) {
-      console.log(err);
-    }
+    const response = await axios.get(`${baseUrl}/shoppingList/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const list = response.data;
+    const ListdDate = new Date(list.date).toISOString().split("T")[0];
+    setFormData({ name: list.name, date: ListdDate });
   };
 
   useEffect(() => {
@@ -36,29 +32,27 @@ const ListForm = ({ token }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
-      if (listId) {
-        await axios.put(`${baseUrl}/shoppingList/${listId}`, formData, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-      } else {
-        await axios.post(`${baseUrl}/shoppingList/new`, formData, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-      }
-      navigate("/");
-    } catch (err) {
-      console.log(err);
+    if (listId) {
+      await axios.put(`${baseUrl}/shoppingList/${listId}`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    } else {
+      await axios.post(`${baseUrl}/shoppingList/new`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
     }
+    navigate("/");
   };
 
   return (
     <div className="form-container">
-      <button id="back-to-all-list-btn" onClick={() => navigate("/")}>All Shopping Lists</button>
+      <button id="back-to-all-list-btn" onClick={() => navigate("/")}>
+        All Shopping Lists
+      </button>
 
       <form className="add-list-form" onSubmit={handleSubmit}>
         <h2>{listId ? "Update List" : "Add New List"}</h2>

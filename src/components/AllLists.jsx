@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
-import './style/AllLists.css'
+import "./style/AllLists.css";
 const AllLists = ({ token, user }) => {
   const [errors, setErrors] = useState("");
   const [lists, setLists] = useState([]);
@@ -49,14 +49,13 @@ const AllLists = ({ token, user }) => {
 
   return (
     <>
-    <div className="header">
+      <div className="header">
         <h2>All Shopping Lists</h2>
         <button className="add-button" onClick={() => navigate("/new-list")}>
           Add New List
         </button>
         <div className="sort-by-date">
           <div id="inner-sort-date">
-            
             <input
               type="checkbox"
               checked={sortByDate}
@@ -65,24 +64,23 @@ const AllLists = ({ token, user }) => {
             <div>
               <label>Sort by Date</label>
             </div>
-
           </div>
         </div>
-        </div>
-        
-        {lists.length === 0 ? (
-          <h2>There are no Lists</h2>
-        ) : (
-          lists.map((list) => (
-            <div className="list" key={list._id}>
-              <div className="list-info">
+      </div>
+
+      {lists.length === 0 ? (
+        <h2 id="no-lists-message">There are no Lists</h2>
+      ) : (
+        lists.map((list) => (
+          <div className="list" key={list._id}>
+            <div className="list-info">
               <h1>{list.name}</h1>
               <p>
-                Last date to purchase:{" "}
+                Last date to purchase:
                 {new Date(list.date).toLocaleDateString()}
               </p>
-              </div>
-              <div className="all-lists-buttons">
+            </div>
+            <div className="all-lists-buttons">
               <button onClick={() => navigate(`/list/${list._id}`)}>
                 View
               </button>
@@ -91,12 +89,11 @@ const AllLists = ({ token, user }) => {
               </button>
               <button onClick={() => handleDelete(list._id)}>Delete</button>
             </div>
-            </div>
-          ))
-        )}
+          </div>
+        ))
+      )}
 
-        <p style={{ color: "darkred" }}>{errors}</p>
-
+      <p style={{ color: "darkred" }}>{errors}</p>
     </>
   );
 };
