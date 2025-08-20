@@ -58,6 +58,7 @@ const ItemForm = () => {
         <input
           type="number"
           name="price"
+          step="0.01"
           value={itemFormData.price}
           onChange={handleChange}
           placeholder="Price"
