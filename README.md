@@ -1,12 +1,25 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![shooping list app](<shopping list app-1.png>)
 
-Currently, two official plugins are available:
+<h2>Shopping List Application:</h2>
+This app can be used by logged in users to create their own shopping Lists and add items to it, The user can see the total amount of money he need to spend on each list. Also, the user can sort the list and display them by their dates.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<h2>Getting started:</h2>
+<ul>
+<li><a href="https://trello.com/b/lOMv6rCH/shopping-list-application">The App Planning Materials</a></li>
+<li>
+<a href="https://github.com/hudasul/shopping-list-app-back-end">The back-end repository</a>
+</li>
+</ul>
 
-## Expanding the ESLint configuration
+<h2>Technologies used:</h2>
+<ul>
+<li>HTML</li>
+<li>CSS</li>
+<li>JavaScript</li>
+<li>Git</li>
+<li>React</li>
+</ul>
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+<h2>Next steps:</h2>
+For future enhancements, maybe would add an extra feature where each List has two types of items extra and imporatnt items to buy and the user can sort the items by their importance (extra or important)
