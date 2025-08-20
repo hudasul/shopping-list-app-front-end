@@ -1,5 +1,5 @@
 
-![shooping list app](<shopping list app-1.png>)
+<img src="src/assets/shopping list app.png" alt="Shopping List Application"/>
 
 <h2>Shopping List Application:</h2>
 This app can be used by logged in users to create their own shopping Lists and add items to it, The user can see the total amount of money he need to spend on each list. Also, the user can sort the list and display them by their dates.
