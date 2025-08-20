@@ -6,10 +6,11 @@ function LoginForm({ onLogin }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const baseUrl = import.meta.env.VITE_BACKEND_URL;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const res = await axios.post("http://localhost:3000/auth/login", {
+    const res = await axios.post(`${baseUrl}/auth/login`, {
       username,
       password,
     });
